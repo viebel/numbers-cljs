@@ -1,6 +1,6 @@
 (defproject modern-cljs "0.1.0-SNAPSHOT"
   :description "A series of tutorials on ClojureScript"
-  :url "https://github.com/magomimmo/modern-cljs"
+  :url "https://github.com/magomimmo/modern-cljs" ;https://github.com/magomimmo/modern-cljs/blob/master/doc/tutorial-18.md
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -19,6 +19,7 @@
 
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2069"]
+                 [com.cemerick/piggieback "0.1.2"]
                  [compojure "1.1.6"]
                  [hiccups "0.2.0"]
                  [domina "1.0.3-SNAPSHOT"]
@@ -26,6 +27,12 @@
                  [org.clojars.magomimmo/shoreleave-remote "0.3.1-SNAPSHOT"]
                  [com.cemerick/valip "0.3.2"]
                  [enlive "1.1.4"]]
+
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  :injections [(require '[cljs.repl.browser :as brepl]
+                        '[cemerick.piggieback :as pb])
+               (defn browser-repl []
+                 (pb/cljs-repl :repl-env (brepl/repl-env :port 9000)))]
 
   :plugins [[lein-cljsbuild "1.0.0"]
             [lein-ring "0.8.8"]
