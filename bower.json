@@ -1,0 +1,8 @@
+{
+  "name": "broca-console",
+  "dependencies": {
+    "angular": ">= 1.2",
+    "angular-route": ">= 1.2",
+    "angular-bootstrap": ">= 0.6"
+  }
+}
