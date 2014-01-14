@@ -112,33 +112,11 @@
 
                 ;; Google Closure Compiler options
                 :compiler { ;; the name of emitted JS script file
-                           :output-to "resources/public/js/modern_dbg.js"
+                           :output-to "resources/public/js/modern.js"
 
                            ;; minimum optimization
                            :optimizations :whitespace
                            ;; prettyfying emitted JS
                            :pretty-print true}}
-               :pre-prod
-               { ;; same path as above
-                :source-paths ["src/brepl" "src/cljs"]
-
-                :compiler { ;; different JS output name
-                           :output-to "resources/public/js/modern_pre.js"
-
-                           ;; simple optimization
-                           :optimizations :simple
-
-                           ;; no need prettification
-                           :pretty-print false}}
-               :prod
-               { ;; same path as above
-                :source-paths ["src/cljs"]
-
-                :compiler { ;; different JS output name
-                           :output-to "resources/public/js/modern.js"
-
-                           ;; advanced optimization
-                           :optimizations :advanced
-
-                           ;; no need prettification
-                           :pretty-print false}}}})
+               }}
+               )
