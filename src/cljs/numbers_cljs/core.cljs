@@ -23,10 +23,10 @@
 
 
 (defn- numbers-ctrl [$scope]
+  (aset $scope "range" 200)
+  (aset $scope "divisor" 2)
+  (aset $scope "condition" "x % 4 == 0")
   (.$watch $scope "range" (fn []
-      (aset $scope "range" 200)
-      (aset $scope "divisor" 2)
-      (aset $scope "condition" "x % 4 == 0")
   (.$watchCollection $scope "[range, divisor, condition]" (fn[] 
         (aset $scope "numbers" (clj->js (range 1 (.-range $scope))))
         ;(aset $scope "numbersWithInfo" (info x($scope.numbers, $scope.divisor, $scope.condition);
