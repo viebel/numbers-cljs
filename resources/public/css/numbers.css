@@ -1,0 +1,20 @@
+.numbers {
+    margin-left: 30px;
+    padding-left: 10px;
+    border: 1px outset gray;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(254,255,255,1) 0%,rgba(221,241,249,1) 35%,rgba(160,216,239,1) 100%); /* W3C */
+    box-shadow: 2px 2px 4px gray;
+}
+.numbers .ng-scope {
+    display: inline-block;
+    font: 'Arial 15px';
+    width: 29px;
+}
+
+.condition {
+    font-weight: bold;
+}
+.divisor {
+    color: red;
+}

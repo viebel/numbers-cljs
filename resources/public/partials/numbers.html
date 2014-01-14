@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+
+      Range: <input ng-model="range">
+      Divisor: <input ng-model="divisor" class="divisor">
+      Condition: <input ng-model="condition" class="condition">
+
+    </div>
+    <div class="span5">
+        <!--Body content-->
+        <div class="numbers">
+         <div ng-repeat="number in numbers">
+             <div ng-class="">
+                {{number}}
+            </div>
+          </div>
+         <div ng-repeat="number in numbersWithInfo">
+             <div ng-class="{divisor: number.divisible, condition: number.condition}">
+                {{number.n}}
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
