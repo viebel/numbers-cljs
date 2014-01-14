@@ -34,6 +34,6 @@
 
 ;; main
 (defn ^:export main []
-  (doto (.module js/angular "numbers-cljs" (array "ngRoute" "ui.bootstrap"))
+  (doto (.module js/angular "numbers-cljs" (array "ngRoute"))
     (.config (array "$routeProvider" routes))
     (.controller "NumbersCtrl" (array "$scope" numbers-ctrl))))
