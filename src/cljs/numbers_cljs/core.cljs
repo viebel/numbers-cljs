@@ -30,20 +30,18 @@
  
 (defn- numbers-ctrl [$scope]
   (aset $scope "values" (clj->js {
-                         "range" 200
+                         :range 200
                          :divisor 2
                          :condition "x % 4 == 0"
                          }))
   (.$watchCollection $scope "[values.range, values.divisor, values.condition]" (
-       fn[] 
-        (let [values {:range (-> (.-values $scope)
-                                 (.-range))
-                      :condition (-> (.-values $scope)
-                                 (.-condition))
-                      :divisor (-> (.-values $scope)
-                                 (.-divisor))}
+       fn[new-vals] 
+        (let [[my-range divisor condition] new-vals
+              values {:range my-range
+                      :divisor divsor
+                      :condition condition}
               numbers (range 1 (:range values))
-              numbers-with-info (info numbers values) ]
+              numbers-with-info (info numbers values)]
         (aset $scope "numbers" (clj->js numbers))
         (aset $scope "numbersWithInfo" (clj->js numbers-with-info))))))
 
