@@ -9,10 +9,6 @@
   (.otherwise provider (clj->js route-spec)))
 
 
-
-
-
-
 ;; routes
 (defn- routes [$routeProvider]
   (doto $routeProvider
@@ -22,15 +18,34 @@
     (ng-route-otherwise {:redirectTo "/numbers"})))
 
 
+(defn- info [numbers values]
+  (let [{:keys [divisor condition]} values]
+    (map(fn[x] {:n x
+            :divisor (= 0 (mod x divisor))
+            :condition false}) 
+         numbers)))
+
+(defn- get-several [h & more]
+     (map #(aget h %) more))
+ 
 (defn- numbers-ctrl [$scope]
-  (aset $scope "range" 200)
-  (aset $scope "divisor" 2)
-  (aset $scope "condition" "x % 4 == 0")
-  (.$watch $scope "range" (fn []
-  (.$watchCollection $scope "[range, divisor, condition]" (fn[] 
-        (aset $scope "numbers" (clj->js (range 1 (.-range $scope))))
-        ;(aset $scope "numbersWithInfo" (info x($scope.numbers, $scope.divisor, $scope.condition);
-    )))))
+  (aset $scope "values" (clj->js {
+                         "range" 200
+                         :divisor 2
+                         :condition "x % 4 == 0"
+                         }))
+  (.$watchCollection $scope "[values.range, values.divisor, values.condition]" (
+       fn[] 
+        (let [values {:range (-> (.-values $scope)
+                                 (.-range))
+                      :condition (-> (.-values $scope)
+                                 (.-condition))
+                      :divisor (-> (.-values $scope)
+                                 (.-divisor))}
+              numbers (range 1 (:range values))
+              numbers-with-info (info numbers values) ]
+        (aset $scope "numbers" (clj->js numbers))
+        (aset $scope "numbersWithInfo" (clj->js numbers-with-info))))))
 
 ;; main
 (defn ^:export main []
