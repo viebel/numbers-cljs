@@ -29,13 +29,13 @@
      (map #(aget h %) more))
  
 (defn- numbers-ctrl [$scope]
-  (aset $scope :range 200)
-  (aset $scope :divisor 2)
-  (aset $scope :condition "x % 4 == 0")
+  (aset $scope "range" 10)
+  (aset $scope "divisor" 2)
+  (aset $scope "condition" "x % 4 == 0")
   (.$watchCollection $scope "[range, divisor, condition]" (
        fn[new-vals] 
         (let [[my-range divisor condition] new-vals
-              values {:divisor divisor
+              values {:divisor (js/parseInt divisor)
                       :condition condition}
               numbers (range 1 (+ 1 (js/parseInt my-range)))
               numbers-with-info (info numbers values)]
