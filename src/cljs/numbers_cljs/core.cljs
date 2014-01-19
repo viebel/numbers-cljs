@@ -21,7 +21,7 @@
 (defn- info [numbers values]
   (let [{:keys [divisor condition]} values]
     (map(fn[x] {:n x
-            :divisor (= 0 (mod x divisor))
+            :divisible (= 0 (mod x divisor))
             :condition false}) 
          numbers)))
 
@@ -29,7 +29,7 @@
      (map #(aget h %) more))
  
 (defn- numbers-ctrl [$scope]
-  (aset $scope "range" 10)
+  (aset $scope "range" 100)
   (aset $scope "divisor" 2)
   (aset $scope "condition" "x % 4 == 0")
   (.$watchCollection $scope "[range, divisor, condition]" (
