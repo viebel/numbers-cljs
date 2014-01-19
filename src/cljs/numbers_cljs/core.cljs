@@ -18,16 +18,12 @@
     (ng-route-otherwise {:redirectTo "/numbers"})))
 
 
-(defn- info [numbers values]
-  (let [{:keys [divisor condition]} values]
+(defn- info [numbers {:keys [divisor condition]}]
     (map(fn[x] {:n x
             :divisible (= 0 (mod x divisor))
             :condition false}) 
-         numbers)))
+         numbers))
 
-(defn- get-several [h & more]
-     (map #(aget h %) more))
- 
 (defn- numbers-ctrl [$scope]
   (aset $scope "range" 100)
   (aset $scope "divisor" 2)
