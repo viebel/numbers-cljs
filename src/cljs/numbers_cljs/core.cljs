@@ -18,25 +18,28 @@
     (ng-route-otherwise {:redirectTo "/numbers"})))
 
 
-(defn- info [numbers {:keys [divisor condition]}]
-    (map(fn[x] {:n x
-            :divisible (= 0 (mod x divisor))
-            :condition false}) 
-         numbers))
-
 (defn- numbers-ctrl [$scope]
-  (aset $scope "range" 100)
-  (aset $scope "divisor" 2)
-  (aset $scope "condition" "x % 4 == 0")
-  (.$watchCollection $scope "[range, divisor, condition]" (
-       fn[new-vals] 
-        (let [[my-range divisor condition] new-vals
-              values {:divisor (js/parseInt divisor)
-                      :condition condition}
-              numbers (range 1 (+ 1 (js/parseInt my-range)))
-              numbers-with-info (info numbers values)]
-        (aset $scope "numbers" (clj->js numbers))
-        (aset $scope "numbersWithInfo" (clj->js numbers-with-info))))))
+  (let [
+       model-defaults (fn[]
+          (aset $scope "range" 100)
+          (aset $scope "divisor" 2)
+          (aset $scope "condition" "x % 4 == 0"))
+       watch-changes (fn[]
+            (.$watchCollection $scope "[range, divisor, condition]" (
+               fn[new-vals] 
+                (let [[rr dd condition] new-vals
+                      [my-range divisor] (map #(js/parseInt %) [rr dd])
+                      numbers (range 1 (+ 1 my-range))
+                      numbers-with-info (map (fn[x] { :n x
+                                                      :divisible (= 0 (mod x divisor))
+                                                      :condition false}) 
+                                         numbers)]
+                (aset $scope "numbers" (clj->js numbers))
+                (aset $scope "numbersWithInfo" (clj->js numbers-with-info))))))
+        ]
+
+  (model-defaults)
+  (watch-changes)))
 
 ;; main
 (defn ^:export main []
