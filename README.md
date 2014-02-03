@@ -7,4 +7,4 @@ bower update
 lein ring server <port>
 ```
 # Usage
-go to: http://localhost:<port>/index.html
+go to: http://localhost:\<port\>/index.html
