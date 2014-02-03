@@ -1,9 +1,8 @@
-# modern-cljs
+# numbers-cljs
 
-A series of tutorials to guide you in creating and setting up
+An small application that shows how to integrate ClojureScript and Angular.js
 [ClojureScript][1] (CLJS) projects.
 
-# License
-
-Copyright © Mimmo Cosenza, 2012-2013. Released under the Eclipse Public
-License, the same as Clojure.
+# Installation
+* bower update  
+* lein ring server <port>
